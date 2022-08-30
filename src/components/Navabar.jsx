@@ -1,6 +1,12 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom'
 const Navabar = () => {
+   
+        const navigate = useNavigate();
+        const handleChange = () =>{
+            navigate('/Login')
+        }
+    
     return (
         <div className = "flex justify-between  bg-blue-300 shadow-xl text-lg ">
             <div className = "mx-10 my-5" >
@@ -10,7 +16,7 @@ const Navabar = () => {
                 <button>Assignment</button>
             </div>
             <div className = "mx-10 my-5">
-                <button>Login</button>
+                <button onClick = {handleChange}>Login</button>
             </div>
             
         </div>
