@@ -20,6 +20,8 @@ function App() {
     setClassid(e.target.value);
   }
 
+
+
   const handleClassNameChange = (e) => {
     setClassName(e.target.value);
   }
@@ -51,6 +53,27 @@ function App() {
     }
   }
 
+  const joinClass =()=>{
+    if (localStorage.getItem('token')) {
+      fetch(`${URL}/api/join-class`, {
+        method: 'POST',
+        body : JSON.stringify({cls_id :classid}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${localStorage.getItem('token')}`
+        }
+      }).then(async (res) => {
+        let data = await res.json()
+        if (res.status === 200) {
+          setClass(data.data)
+          console.log(data.data)
+        }
+        else {
+          alert(data.error)
+        }
+      })
+    }
+  }
   const handleRegister = () => {
     if (!username || !password || !email) {
       alert("Empty Username or Password")
@@ -196,7 +219,9 @@ function App() {
           <button className="rounded-lg py-2 bg-red-400 px-5 border-black" type="submit" onClick={()=> createClass()}>Create Class</button>
         </div> : <div className="mt-4">
           <input className="rounded-md bg-red-100 border-black my-4" type="text" onChange={handleClassIdChange} value={classid} placeholder="Class id" /><br />
-          <button className="rounded-lg py-2 bg-red-400 px-5 border-black" type="submit" onClick={()=> {}}>Join Class</button>
+          <button className="rounded-lg py-2 bg-red-400 px-5 border-black" type="submit" onClick={()=> {
+            joinClass()
+          }}>Join Class</button>
         </div>
 
 
