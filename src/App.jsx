@@ -11,7 +11,7 @@ function App() {
   }, [])
   // const URL = process.env.REACT_APP_API_URL;
   return (
-    <div className = "bg-purple-50">
+    <div className = "bg-background">
       {msg.message}
     </div>
   );

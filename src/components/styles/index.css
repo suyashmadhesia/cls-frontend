@@ -1,0 +1,9 @@
+
+.section {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    justify-content: space-between;
+    overflow: auto;
+}

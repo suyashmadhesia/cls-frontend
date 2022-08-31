@@ -5,10 +5,9 @@ import Navabar from '../components/Navabar'
 
 const Homepage = () => {
     return (
-        <div className = "bg-purple-50">
+        <div className = "bg-background">
             <Navabar/>
             <Hero/>
-            
         </div>
     )
 }
