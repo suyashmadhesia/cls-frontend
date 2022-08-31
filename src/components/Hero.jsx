@@ -1,7 +1,11 @@
 import React from 'react'
 import image from '../assets/cls_image.png'
-
+import { useNavigate } from 'react-router-dom';
 const Hero = () => {
+    const navigate = useNavigate();
+        const handleChange = () =>{
+            navigate('/Register')
+        }
     return (
         <div className = "bg-purple-50  h-screen overflow-y-hidden flex-wrap flex justify-between   items-center ">
             <div className = "items-center my-32 mx-10 ml-[78px]">
@@ -13,7 +17,7 @@ const Hero = () => {
 immpossible. We make it easy</h3>
 
                 <div className = "text-white" >
-                    <button className = "border-r-6 rounded-3xl mx- my-3 px-6 py-2 bg-pink-600 ">
+                    <button  onClick = {handleChange} className = "border-r-6 rounded-3xl mx- my-3 px-6 py-2 bg-purple-800 ">
                         Get started
                     </button>
                 </div> 
