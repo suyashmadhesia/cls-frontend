@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import image from '../assets/loginimage.png'
 
 const Login = () => {
     
@@ -20,6 +21,9 @@ const Login = () => {
         const handleChange = () =>{
             navigate('/Register')
         }
+        const navtoClass = () =>{
+            navigate('/Classroom')
+        }
     
 
     const handleLogin = () =>{
@@ -38,6 +42,7 @@ const Login = () => {
             setusername('')
             let data = await res.json()
             if (res.status === 200) {
+                navtoClass();
                 console.log(data)
               }
         }).catch(e=>console.log(e))
@@ -45,29 +50,38 @@ const Login = () => {
 
 
     return (
-        <div className = "flex items-center justify-center text-lg text-center">
-           <div className = " p-4 mx-5 my-[125px] h-[400px] w-[600px] bg-purple-100 shadow-md rounded-lg">
-               <h1 className = "text-3xl">Login </h1>
-               <div className = "items-center">
-               <form className = "grid my-5">
-                    <label className = "my-12 flex  justify-between items-center">
-                        Name:
-                        <input onChange = {usernameHndl} value = {username} className = "h-10 w-[490px] ml-4 rounded-xl px-3" type="text" name="name" />
-                    </label>
-                    <label className = "flex justify-between items-center">
-                        Password:
-                        <input onChange = {passwordHndl} value = {userPassword} className = "h-10 w-[490px] rounded-xl px-3" type="text" name="name" />
-                    </label>
-                    
-                </form>
-                <div className = "flex justify-between  mx-5">
-                <button  onClick = {handleLogin}className = "my-7 bg-cyan-400 rounded-lg px-7 py-2">login </button>
-                <button  onClick = {handleChange} className = "my-7 bg-cyan-400 rounded-lg px-7 py-2">Register</button>
+        <div className = "flex h-screen items-center bg-purple  justify-between">
+            <div className = "  w-1/2">
+                <img  className = "ml-auto mr-auto block w-3/4"
+                src = {image} 
+                alt = "LoginImage"
+                />
+            </div>
+            <div className = "h-screen flex m-auto  justify-center relative items-center bg-white w-1/2 ">
+            <div className = " w-3/4  text-center">
+                <h1 className = "text-3xl my-2 ">WELCOME BACK </h1>
+                <p className = "text-gray-400 my-5">Enter username and password to login 
+                        <br/>in your account.</p>
+                <div className = "items-center    justify-center">
+                <form className = "">
+                        
+                           
+                            <input onChange = {usernameHndl}  placeholder = "username" value = {username} className = "h-12 w-3/4 my-6 rounded-xl border-2 px-5" type="text" name="name" />
+                        
+                        
+                            <input onChange = {passwordHndl} placeholder = "password" value = {userPassword} className = "h-12 w-3/4 my-6 border-2 rounded-xl px-5" type="text" name="name" />
+                        
+                        
+                    </form>
+                    <div>
+                    <button  onClick = {handleLogin}className = "mt-8 mb-3 bg-purple text-white rounded-lg h-12 w-3/4  ">login </button>
+                    </div>
+                    <button onClick = {handleChange} className = "text-purple">New User ?</button>
+                
                 </div>
-               
-               </div>
-           </div>
+            </div>
 
+            </div>
         </div>
     )
 }
