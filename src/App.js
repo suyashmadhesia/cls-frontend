@@ -4,25 +4,21 @@ import Classroom from "./components/Classroom";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import {useEffect} from "react"
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  
-  useEffect(() => {
-    if(localStorage.getItem('token')){
-       
-    }
- }, [])
 
   return (
     <BrowserRouter>
     <Routes>
       <Route path = "/" element = {<Homepage/>}/>
-      <Route path = "Login" element = {<Login/>}/>
-      <Route path = "Register" element = {<Register/>}/>
-      <Route path = "Classroom" element = {<Classroom/>}/>
+      <Route path = "login" element = {<Login/>}/>
+      <Route path = "register" element = {<Register/>}/>
+      <Route path = "classroom" element = {<Classroom/>}/>
       
     </Routes>
+    <ToastContainer />
     </BrowserRouter>
     
   )
