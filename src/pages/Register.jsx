@@ -48,7 +48,7 @@ const Regsiter = () => {
         if(state.isError){
             toast.error(state.message)
         }
-        if(state.isSuccess || state.user.token){
+        if(state.isSuccess || state.user){
             toast.success("Welcome to Classroom")
             navigate('/classroom')
         }
