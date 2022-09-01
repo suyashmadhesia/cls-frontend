@@ -8,8 +8,8 @@ const Hero = () => {
         navigate('/Register')
     }
     return (
-        <div className="bg-background  h-screen overflow-y-hidden flex justify-between items-center ">
-            <div className="items-center my-32 mx-10 ml-8">
+        <div className="bg-background   h-screen overflow-y-hidden flex justify-between items-center ">
+            <div className="items-center sm:text-left my-32 mx-10 ml-8">
                 <h1 className="text-6xl font-bold  my-2">Build Better<br />
                     Assignments</h1>
 
@@ -24,7 +24,7 @@ const Hero = () => {
                 </div>
             </div>
             <div className='w-1/2 right-0'>
-                <img className="block h-auto w-3/4 mr-auto ml-auto"
+                <img className="block h-auto w-3/4  mr-auto ml-auto"
                     src={image}
                     alt="ima"
                 />

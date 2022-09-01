@@ -2,12 +2,14 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import image from '../assets/loginimage.png'
+// import { FaBeer } from 'react-icons/fa';
 
 
 
 const Regsiter = () => {
     const URL = process.env.REACT_APP_API_URL; 
     const [username, setusername] = useState('')
+    const [confirmPassword, setconfirmPassword] = useState('')
     const [email ,setEmail] = useState('');
     const [userPassword, setPassword] = useState('');
     const usernameHndl = (e)=>{
@@ -15,6 +17,9 @@ const Regsiter = () => {
     }
     const passwordHndl = (e) =>{
         setPassword(e.target.value)
+    }
+    const confirmPass = (e) =>{
+        setconfirmPassword(e.target.value)
     }
 
     const emailHndl = (e) =>{
@@ -33,6 +38,10 @@ const Regsiter = () => {
         if(!username || !userPassword || !email){
             alert("empty username or userPassword or email")
             return 
+        }
+        if(userPassword!==confirmPassword){
+            alert("password didn't match")
+            return
         }
 
         fetch(`${URL}/api/register`, {
@@ -62,7 +71,7 @@ const Regsiter = () => {
     return (
         <div className = "flex h-screen items-center bg-purple  justify-between">
             <div className = "  w-1/2">
-                <img  className = "ml-auto mr-auto block w-3/4"
+                <img  className = "ml-auto mr-auto block w-2/4"
                 src = {image} 
                 alt = "LoginImage"
                 />
@@ -77,11 +86,13 @@ const Regsiter = () => {
                 
                             
                         
-                            <input onChange = {usernameHndl} placeholder = "username" value = {username} className = "h-12 w-3/4 my-4 rounded-xl border-2 px-5" type="text" name="name" />
-                        
+                            <input onChange = {usernameHndl} placeholder = "username" value = {username} className = "h-12 w-3/4 my-4 rounded-xl border-2 px-5" type="text" name="name" 
+                            
+                            />
+                            
                             <input onChange = {passwordHndl}  placeholder = "Password"   value = {userPassword} className = "h-12 w-3/4 my-4 rounded-xl border-2 px-5" type="text" name="name" />
 
-                            <input onChange = {passwordHndl} placeholder = "confirm Password" value = {userPassword} className = "h-12 w-3/4 my-4 rounded-xl border-2 px-5" type="text" name="name" />
+                            <input onChange = {confirmPass} placeholder = "confirm Password" value = {confirmPassword} className = "h-12 w-3/4 my-4 rounded-xl border-2 px-5" type="text" name="name" />
 
                             <input onChange = {emailHndl} placeholder = "Email" value = {email} className = "h-12 w-3/4 mt-3 mb-1 rounded-xl border-2 px-5" type="text" name="name" />
                         

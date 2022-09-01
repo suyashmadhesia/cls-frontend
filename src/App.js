@@ -1,11 +1,19 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Classroom from "./components/Classroom";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import {useEffect} from "react"
 
 function App() {
+  
+  useEffect(() => {
+    if(localStorage.getItem('token')){
+       
+    }
+ }, [])
+
   return (
     <BrowserRouter>
     <Routes>
@@ -16,10 +24,7 @@ function App() {
       
     </Routes>
     </BrowserRouter>
-    // <div className = " text-center">
-    //   <Homepage/>
-    //   <Login/>
-    // </div>
+    
   )
 }
 

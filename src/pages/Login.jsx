@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import image from '../assets/loginimage.png'
 
@@ -10,7 +10,7 @@ const Login = () => {
     const [userPassword, setPassword] = useState('')
     const usernameHndl = (e) =>{
         setusername(e.target.value);
-        // console.log(username)
+       
     }
     const passwordHndl = (e) =>{
         setPassword(e.target.value)
@@ -42,17 +42,26 @@ const Login = () => {
             setusername('')
             let data = await res.json()
             if (res.status === 200) {
+                
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('account_id', data.account_id)
                 navtoClass();
                 console.log(data)
               }
         }).catch(e=>console.log(e))
     }
 
+    useEffect(() => {
+       if(localStorage.getItem('token')){
+           navtoClass();
+       }
+    }, [])
+
 
     return (
         <div className = "flex h-screen items-center bg-purple  justify-between">
             <div className = "  w-1/2">
-                <img  className = "ml-auto mr-auto block w-3/4"
+                <img  className = "ml-auto mr-auto block w-2/4"
                 src = {image} 
                 alt = "LoginImage"
                 />
@@ -66,7 +75,7 @@ const Login = () => {
                 <form className = "">
                         
                            
-                            <input onChange = {usernameHndl}  placeholder = "username" value = {username} className = "h-12 w-3/4 my-6 rounded-xl border-2 px-5" type="text" name="name" />
+                            <input onChange = {usernameHndl}  placeholder = "username"  value = {username} className = "h-12 w-3/4 my-6 rounded-xl border-2 px-5" type="text" name="name" />
                         
                         
                             <input onChange = {passwordHndl} placeholder = "password" value = {userPassword} className = "h-12 w-3/4 my-6 border-2 rounded-xl px-5" type="text" name="name" />
