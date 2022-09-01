@@ -5,7 +5,7 @@ import "./styles/index.css";
 const Hero = () => {
     const navigate = useNavigate();
     const handleChange = () => {
-        navigate('/Register')
+        navigate('/register')
     }
     return (
         <div className="bg-background  h-screen overflow-y-hidden flex justify-between items-center ">

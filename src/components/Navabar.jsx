@@ -4,7 +4,7 @@ const Navabar = () => {
    
         const navigate = useNavigate();
         const handleChange = () =>{
-            navigate('/Login')
+            navigate('/login')
         }
     
     return (
