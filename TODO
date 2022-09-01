@@ -1,0 +1,3 @@
+TODO
+1. Fix the issue with the "User Register toast" (cause of error is using state directly from the store)
+2. Implement protected route for the logged in user
