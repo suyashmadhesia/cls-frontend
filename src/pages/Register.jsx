@@ -4,7 +4,8 @@ import image from '../assets/loginimage.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { registerUser, reset } from '../features/auth/authSlice'
+import { reset } from '../features/auth/authSlice'
+import { registerUser } from '../features/actions/authActions'
 
 
 const Regsiter = () => {
