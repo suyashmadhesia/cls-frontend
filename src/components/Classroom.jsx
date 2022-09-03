@@ -17,8 +17,8 @@ const Classroom = () => {
             <h1>welcome to Classroom {state?.user?.account_id}</h1>
             <button className='bg-black text-white' onClick={() => {
                 dispatch(logoutUser())
-                navigate('/login')
                 dispatch(reset())
+                navigate('/login')
                 toast.success("Logged out successfully")
             }}>
                 Logout

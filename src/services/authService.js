@@ -21,6 +21,7 @@ const login = async (userData) => {
     if(response.data){
         setLocalStorage('user', response.data);
     }
+    return response.data;
 }
 
 const logout = () => {

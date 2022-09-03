@@ -10,16 +10,16 @@ export const registerUser = createAsyncThunk('auth/register', async (user, thunk
     }
 })
 
-export const loginUser = createAsyncThunk('auth/login',  async (user, thunkAPI) => {
-    try{
+export const loginUser = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+    try {
         return await authService.login(user);
     }
-    catch(err){
+    catch (err) {
         const message = err.response.data.error
         return thunkAPI.rejectWithValue(message);
     }
 })
 
-export const logoutUser = createAsyncThunk('auth/logout', async (thunkAPI)=>{
+export const logoutUser = createAsyncThunk('auth/logout', async (thunkAPI) => {
     authService.logout();
 })

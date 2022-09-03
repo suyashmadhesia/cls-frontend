@@ -53,7 +53,7 @@ const Login = () => {
                 closeButton: false,
                 
             })
-            navigate('/classroom')
+            navigate('/')
         }
         dispatch(reset())
     }, [state.user, state.isError, state.isSuccess, state.message, navigate, dispatch])

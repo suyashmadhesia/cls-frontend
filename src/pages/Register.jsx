@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { reset } from '../features/auth/authSlice'
-import { registerUser } from '../features/actions/authActions'
+import { registerUser} from '../features/actions/authActions'
 
 
 const Regsiter = () => {
@@ -51,7 +51,7 @@ const Regsiter = () => {
         }
         if(state.isSuccess || state.user){
             toast.success("Welcome to Classroom")
-            navigate('/classroom')
+            navigate('/')
         }
         dispatch(reset())
     }, [state.user, state.isError, state.isSuccess, state.message, navigate, dispatch])
