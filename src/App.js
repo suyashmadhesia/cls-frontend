@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Classroom from "./components/Classroom";
 import Homepage from "./pages/Homepage";
 import { useEffect } from "react"
@@ -10,19 +10,19 @@ import { useStateContext } from "./contexts/contextProvider";
 import { useSelector } from "react-redux";
 
 // This is used for routing user to landing page when the user is not logged in
-const PrivateRoute = ({ state, to }) => {
-  if (state.user) {
-    return <Classroom />
+const PrivateRouteClass = ({ state, children }) => {
+  if(!state.user){
+    return <Navigate replace to={"/home"} />
   }
-  else if (to==="login") {
-    return <Login />
+  return children
+}
+
+const PrivateRouteLogin = ({state, children}) => {
+  if(state.user){
+    return <Navigate replace to={"/"} />
   }
-  else if (to === "register"){
-    return <Register />
-  }
-  else{
-    return <Homepage />
-  }
+
+  return children
 }
 
 function App() {
@@ -41,21 +41,29 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route exact path="/" element={
+          <PrivateRouteClass state={state}>
+            <Classroom />
+          </PrivateRouteClass>
+        } />
+        <Route exact path="/home" element={
+          <PrivateRouteLogin state={state}>
+            <Homepage />
+          </PrivateRouteLogin>
+        } />
         <Route exact path="/login" element={
-          <PrivateRoute state={state} to="login" />
+          <PrivateRouteLogin state={state}>
+            <Login />
+          </PrivateRouteLogin>
         } />
         <Route exact path="/register" element={
-          <PrivateRoute state={state} to="register" />
+          <PrivateRouteLogin state={state}>
+            <Register />
+          </PrivateRouteLogin>
         } />
-        <Route exact path="/" element={
-          <PrivateRoute state={state} />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
-    // <div className = " text-center">
-    //   <Homepage/>
-    //   <Login/>
-    // </div>
   )
 }
 

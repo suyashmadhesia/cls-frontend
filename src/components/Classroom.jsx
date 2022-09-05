@@ -3,7 +3,10 @@ import { logoutUser } from '../features/actions/authActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { reset } from '../features/auth/authSlice'
-import { toast } from 'react-toastify'
+import { notify } from '../helpers/notify';
+import {
+    SUCCESS_NOTIFICATION,
+} from "../helpers/notificationTypes";
 
 const Classroom = () => {
 
@@ -14,12 +17,12 @@ const Classroom = () => {
     
     return (
         <div className="text-center justify-center ">
-            <h1>welcome to Classroom {state?.user?.account_id}</h1>
+            <h1>welcome to Classroom {state.user.account_id}</h1>
             <button className='bg-black text-white' onClick={() => {
                 dispatch(logoutUser())
                 dispatch(reset())
                 navigate('/login')
-                toast.success("Logged out successfully")
+                notify("Logged out successfully", SUCCESS_NOTIFICATION, "logout")
             }}>
                 Logout
             </button>

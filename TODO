@@ -1,4 +1,5 @@
 TODO
 1. Fix the issue with the "User Register toast" (cause of error is using state directly from the store) #FIXED
-2. Implement protected route for the logged in user #FIXED (Not working properly)
+2. Implement protected route for the logged in user #FIXED
 3. Login giving state with no user. # FIXED
+4. After login or logout toast is not working or not visible.
