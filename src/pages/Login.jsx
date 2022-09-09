@@ -3,9 +3,14 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import image from '../assets/loginimage.png'
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify'
 import { reset } from '../features/auth/authSlice'
 import { loginUser } from '../features/actions/authActions'
+import { notify } from '../helpers/notify';
+import {Link} from "react-router-dom";
+import {
+    SUCCESS_NOTIFICATION,
+    ERROR_NOTIFICATION,
+} from "../helpers/notificationTypes";
 
 const Login = () => {
 
@@ -29,7 +34,7 @@ const Login = () => {
 
     const handleSubmit = () => {
         if (!formData.username || !formData.password) {
-            toast.error("Please fill all the fields")
+            notify("Fill all the fields", ERROR_NOTIFICATION, "error")
             return
         }
         else {
@@ -45,15 +50,11 @@ const Login = () => {
 
     useEffect(() => {
         if(state.isError){
-            toast.error(state.message)
+            notify(state.message, ERROR_NOTIFICATION, "error")
         }
         if(state.isSuccess || state.user){
-            toast.success("Welcome to Classroom", {
-                toastId: "welcome",
-                closeButton: false,
-                
-            })
             navigate('/')
+            notify("Logged in successfully", SUCCESS_NOTIFICATION, "loggedIN")
         }
         dispatch(reset())
     }, [state.user, state.isError, state.isSuccess, state.message, navigate, dispatch])
@@ -81,13 +82,13 @@ const Login = () => {
                     <p className="text-gray-400 my-5">Enter username and password to login
                         <br />in your account.</p>
                     <div className="items-center    justify-center">
-                        <form className="">
+                        <form autoComplete='off'>
 
 
-                            <input onChange={handleChange} placeholder="username" value={formData.username} className="h-12 w-3/4 my-6 rounded-xl border-2 px-5" type="text" name="username" />
+                            <input onChange={handleChange} placeholder="username" value={formData.username} className="h-12 w-3/4 my-6 rounded-xl border-2 px-5 focus:border-purple active:border-3 focus:outline-none" type="text" name="username" />
 
 
-                            <input onChange={handleChange} placeholder="password" value={formData.password} className="h-12 w-3/4 my-6 border-2 rounded-xl px-5" type="password" name="password" />
+                            <input onChange={handleChange} placeholder="password" value={formData.password} className="h-12 w-3/4 my-6 border-2 rounded-xl px-5 focus:border-purple active:border-3 focus:outline-none" type="password" name="password" />
 
 
                         </form>
@@ -96,8 +97,9 @@ const Login = () => {
                                 handleSubmit();
                             }} className="mt-8 mb-3 bg-purple text-white rounded-lg h-12 w-3/4  ">login </button>
                         </div>
-                        <button onClick={() => { }} className="text-purple">New User ?</button>
-
+                        <div className="text-gray-400 text-base mt-1">
+                            Not Register ? <span className="text-purple"><Link to="/register">Register</Link></span>
+                        </div>
                     </div>
                 </div>
 

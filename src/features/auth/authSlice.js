@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, loginUser, logoutUser } from "../actions/authActions";
+import { fetchAllClassAction } from "../actions/classActions";
 import { getLocalStorage } from "../../helpers/localStorage";
 
 
 const USER = getLocalStorage("user") ? getLocalStorage("user") : null
-
 const initialState = {
     user: USER,
+    classes: null,
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -23,9 +24,16 @@ export const authSlice = createSlice({
                 ...state,
                 isError: false,
                 isSuccess: false,
-                isLoading:false,
+                isLoading: false,
                 message: '',
 
+            }
+
+        },
+        resetClass: (state) => {
+            return {
+                ...state,
+                classes: null
             }
 
         }
@@ -81,8 +89,26 @@ export const authSlice = createSlice({
                     state.message = action.payload;
                     state.user = null;
                 })
+            .addCase(fetchAllClassAction.fulfilled,
+                (state, action) => {
+                    state.classes = action.payload?.data
+                    state.isSuccess = true;
+
+                }
+            )
+            .addCase(fetchAllClassAction.rejected, (state, action) => {
+                state.isSuccess=false;
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+            })
+            .addCase(fetchAllClassAction.pending, (state) => {
+                state.isLoading = true;
+            })
     }
-});
+}
+);
 
 export const { reset } = authSlice.actions;
+export const {resetClass } = authSlice.actions;
 export default authSlice.reducer;
